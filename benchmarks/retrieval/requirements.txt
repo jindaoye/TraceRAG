@@ -1,0 +1,4 @@
+qdrant-client>=1.12,<2
+ranx==0.3.21
+requests>=2.31,<3
+markdown-it-py>=3,<5

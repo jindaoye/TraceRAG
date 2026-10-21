@@ -8,7 +8,7 @@ import tomllib
 
 from .config import RagConfigError
 
-DEFAULT_CONFIG = '''# Praxis-RAG service settings. Restart the service after editing.
+DEFAULT_CONFIG = '''# TraceRAG service settings. Restart the service after editing.
 # Environment variables override these values.
 [environment]
 RAG_BACKEND = "qdrant"
@@ -53,7 +53,7 @@ def load_service_config() -> Path:
         with path.open("rb") as stream:
             document = tomllib.load(stream)
     except (OSError, ValueError) as exc:
-        raise RagConfigError(f"Cannot read Praxis-RAG config: {path}; check file access and TOML syntax") from exc
+        raise RagConfigError(f"Cannot read TraceRAG config: {path}; check file access and TOML syntax") from exc
 
     values = document.get("environment")
     if set(document) != {"environment"} or not isinstance(values, dict):

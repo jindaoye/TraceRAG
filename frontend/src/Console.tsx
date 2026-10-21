@@ -154,7 +154,7 @@ export function Console({
       <aside className="sidebar">
         <div className="brand">
           <BookOutlined />
-          <span>Praxis-RAG</span>
+          <span>TraceRAG</span>
         </div>
         <nav aria-label="主导航">
           {pages.map((page) => (

@@ -1,4 +1,4 @@
-"""Praxis-RAG knowledge and retrieval service.
+"""TraceRAG knowledge and retrieval service.
 
 The stable MCP contract supports a deterministic Mock backend and a Qdrant
 backend with Dense, BM25 Sparse, RRF Hybrid, and Cross Encoder stages without

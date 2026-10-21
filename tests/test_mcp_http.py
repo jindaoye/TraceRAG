@@ -191,7 +191,7 @@ def test_both_protocol_lifecycles(tmp_path, mode):
             ) as client:
                 assert client.protocol_version == ("2025-11-25" if mode == "legacy" else "2026-07-28")
                 if mode != "2026-07-28":
-                    assert client.server_info.name == "Praxis-RAG"
+                    assert client.server_info.name == "TraceRAG"
                     assert client.server_info.version == "0.4.0"
                     assert client.server_capabilities.tools.list_changed
                 assert [tool.name for tool in (await client.list_tools()).tools] == [

@@ -300,7 +300,7 @@ def create_service_app(
         async with mcp_endpoint.run():
             yield
 
-    app = FastAPI(title="Praxis-RAG", version=__version__, lifespan=lifespan)
+    app = FastAPI(title="TraceRAG", version=__version__, lifespan=lifespan)
     app.state.runtime = resolved_runtime
     app.state.mcp_endpoint = mcp_endpoint
     app.router.routes.append(Route("/mcp", endpoint=mcp_endpoint, methods=["GET", "POST", "DELETE"]))

@@ -3,9 +3,9 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "praxis-rag"
+name = "tracerag"
 version = "0.4.0"
-description = "Praxis-RAG: a standalone knowledge and retrieval service with MCP, REST API, and a web console."
+description = "TraceRAG: a standalone knowledge and retrieval service with MCP, REST API, and a web console."
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
@@ -36,8 +36,8 @@ pdf = [
 ]
 
 [project.urls]
-Repository = "https://github.com/Guan0923/xinghe_rag"
-Issues = "https://github.com/Guan0923/xinghe_rag/issues"
+Repository = "https://github.com/jindaoye/TraceRAG"
+Issues = "https://github.com/jindaoye/TraceRAG/issues"
 
 [project.scripts]
 rag-mcp-debug = "rag_mcp.debug:main"

@@ -1,4 +1,4 @@
-# Praxis RAG PDF 修复与验证记录
+# TraceRAG PDF 修复与验证记录
 
 日期：2026-09-09。分支：`codex/pdf-parsing-fidelity`，基于本地 `main` 的 `f6e8515`。
 

@@ -1,6 +1,6 @@
-# Praxis-RAG 使用与部署
+# 溯知 RAG（TraceRAG）使用与部署
 
-本文介绍 Praxis-RAG 的安装、部署、接口和开发方式。产品概览见 [README](../README.md)。`rag-service` 一个进程同时提供：
+本文介绍 TraceRAG 的安装、部署、接口和开发方式。产品概览见 [README](../README.md)。`rag-service` 一个进程同时提供：
 
 - 标准 Streamable HTTP MCP：`/mcp`
 - 知识管理和检索 REST API：`/v1/*`
@@ -31,12 +31,12 @@ uv tool install --editable ".[api,pdf]"
 从独立 Git 仓库直接安装：
 
 ```powershell
-uv tool install "praxis-rag[api,pdf] @ git+https://github.com/Guan0923/xinghe_rag.git"
+uv tool install "tracerag[api,pdf] @ git+https://github.com/jindaoye/TraceRAG.git"
 ```
 
 安装后，`rag-service`、`rag-mcp-debug`、`rag-mcp-ingest` 和 `rag-service-migrate` 都是独立命令。
 
-以上本地安装命令在仓库根目录运行，需要先安装 uv。项目产品名为 Praxis-RAG，Python 分发包名为 `praxis-rag`；远程仓库地址以当前 Git 配置为准。内部 Python 模块仍为 `rag_mcp`，集合名和命令保留原值。服务配置与新数据使用下文的 `~/.praxis-rag/` 目录，已有知识库不自动迁移。下文开发和测试命令也默认从仓库根目录运行，前端命令另有说明。
+以上本地安装命令在仓库根目录运行，需要先安装 uv。项目产品名为 TraceRAG，Python 分发包名为 `tracerag`；远程仓库地址以当前 Git 配置为准。内部 Python 模块仍为 `rag_mcp`，集合名和命令保留原值。为兼容已有部署，服务配置与新数据继续使用下文的 `~/.praxis-rag/` 目录，已有知识库不自动迁移。下文开发和测试命令也默认从仓库根目录运行，前端命令另有说明。
 
 ## 启动
 
@@ -80,7 +80,7 @@ RAG_WORD_CONVERT_TIMEOUT = "120"
 仓库开发环境中也可以执行：
 
 ```powershell
-uv run --package praxis-rag rag-service
+uv run --package tracerag rag-service
 ```
 
 默认地址：
@@ -319,8 +319,8 @@ Console 的 Token 只保存到浏览器 `sessionStorage`。生产环境还应在
 ```powershell
 uv run --no-sync python -m pytest tests -q
 uv run --no-sync python -m ruff check src tests
-uv run --package praxis-rag rag-mcp-debug "RRF 怎么融合 BM25 和 Dense？"
-uv run --package praxis-rag rag-mcp-debug --schema
+uv run --package tracerag rag-mcp-debug "RRF 怎么融合 BM25 和 Dense？"
+uv run --package tracerag rag-mcp-debug --schema
 ```
 
 协议测试会启动真实本机 HTTP 服务，使用官方客户端和真实文件存储，但以可控检索器和 PDF 解析结果替代模型，不下载模型或连接 Qdrant。这不等于真实模型效果验证。

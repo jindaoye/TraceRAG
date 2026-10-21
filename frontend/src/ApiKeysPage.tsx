@@ -68,7 +68,7 @@ export function ApiKeysPage({ namespaces }: { namespaces: string[] }) {
         const config = await api<{ url: string; headers: Record<string, string> }>(
           "/v1/admin/api-keys/" + encodeURIComponent(key.id) + "/mcp-config", undefined,
           { headers: { "X-RAG-Namespace": namespace }, cache: "no-store" });
-        return ["praxis-" + namespace, config] as const;
+        return ["tracerag-" + namespace, config] as const;
       }));
       await navigator.clipboard.writeText(JSON.stringify({ mcpServers: Object.fromEntries(configs) }, null, 2));
       void message.success("MCP JSON 已复制");

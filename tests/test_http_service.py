@@ -32,7 +32,7 @@ class FakeRuntime:
         self.search_result: dict[str, object] | None = None
 
     def status(self) -> dict[str, object]:
-        return {"status": "ok", "service": "praxis-rag", "collection": "test_hybrid"}
+        return {"status": "ok", "service": "tracerag", "collection": "test_hybrid"}
 
     def list_documents(self, namespace: str) -> list[dict[str, object]]:
         self.calls.append(("list", namespace))
@@ -79,7 +79,7 @@ def test_health_is_available_without_tenant_credentials(service) -> None:
     response = client.get("/health")
 
     assert response.status_code == 200
-    assert response.json()["service"] == "praxis-rag"
+    assert response.json()["service"] == "tracerag"
 
 
 def test_removed_reranker_is_rejected_before_runtime(service) -> None:
@@ -89,7 +89,7 @@ def test_removed_reranker_is_rejected_before_runtime(service) -> None:
     assert response.json()["detail"][0]["loc"] == ["body", "rerank"]
     assert not runtime.search_arguments
     schema = client.get("/openapi.json").json()
-    assert schema["info"]["title"] == "Praxis-RAG"
+    assert schema["info"]["title"] == "TraceRAG"
     assert schema["components"]["schemas"]["SearchBody"]["properties"]["rerank"]["enum"] == ["none", "cross_encoder"]
 
 
@@ -112,7 +112,7 @@ def test_runtime_health_reports_http_configuration_without_calling_models() -> N
     )
     status = runtime.status()
 
-    assert status["service"] == "praxis-rag"
+    assert status["service"] == "tracerag"
     assert "models" not in status
 
 
@@ -134,7 +134,7 @@ def test_standalone_console_is_served_by_the_rag_package(service) -> None:
     for url in ("/", "/console"):
         page = client.get(url)
         assert page.status_code == 200
-        assert "<title>Praxis-RAG</title>" in page.text
+        assert "<title>溯知 RAG（TraceRAG）</title>" in page.text
         assets = Assets()
         assets.feed(page.text)
         assert len(assets.urls) >= 2

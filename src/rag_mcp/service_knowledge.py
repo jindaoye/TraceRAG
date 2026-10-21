@@ -427,7 +427,7 @@ class RagServiceRuntime:
     def status(self) -> dict[str, object]:
         return {
             "status": "ok",
-            "service": "praxis-rag",
+            "service": "tracerag",
             "backend": self.config.backend,
             "collection": self.config.collection,
         }

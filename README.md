@@ -1,10 +1,29 @@
-# Praxis-RAG
+# 溯知 RAG（TraceRAG）
 
 **面向 AI 助手和业务应用的独立知识库与检索服务。**
 
-Praxis-RAG 把分散的文档整理为可搜索、可追溯的知识库。你可以在网页中上传和管理资料，比较检索结果，也可以让 AI 助手通过 MCP 连接知识库，查找资料、读取正文和维护文档。
+TraceRAG 把分散的文档整理为可搜索、可追溯的知识库。你可以在网页中上传和管理资料，比较检索结果，也可以让 AI 助手通过 MCP 连接知识库，查找资料、读取正文和维护文档。
 
 它负责提供资料和出处，**不直接生成最终回答**。如何提问、是否继续查找、如何组织答案，由接入的 AI 助手或业务应用决定。
+
+## 前端展示
+
+前端使用 React、TypeScript 与 Ant Design，支持浅色和深色主题。以下为本地运行的真实界面截图，尚未配置知识库和检索数据。
+
+**检索调试**：选择检索方式、重排方式与候选数量，查看证据片段、来源和各阶段耗时；支持三种检索方式并排比较。
+
+![TraceRAG 检索调试页面](docs/images/console-search.png)
+
+<details>
+<summary>查看知识库创建与模型配置页面</summary>
+
+**知识库配置**：为每个知识库设置 Embedding API、可选 Reranker 和文本切分参数。
+
+![TraceRAG 知识库配置页面](docs/images/console-create.png)
+
+</details>
+
+启动后打开 `http://127.0.0.1:8011/console` 即可使用。部署步骤见 [使用与部署指南](docs/USAGE.md)。
 
 ## 适用场景
 
@@ -63,7 +82,7 @@ PDF 的公式与表格行会按内容边界处理，减少在切分过程中拆�
 
 ### 独立部署与模型连接
 
-Praxis-RAG 不依赖其他 Agent 项目，可独立安装和运行。Qdrant 保存检索索引；文档及解析产物保存在服务的数据目录中。
+TraceRAG 不依赖其他 Agent 项目，可独立安装和运行。Qdrant 保存检索索引；文档及解析产物保存在服务的数据目录中。
 
 语义检索和重排分别连接模型 API，可使用不同提供方，也可连接自行部署的本地推理服务。HTTP 服务本身不加载这两类模型的权重；PDF 解析仍需要单独准备本地环境和模型。
 
@@ -71,7 +90,7 @@ Praxis-RAG 不依赖其他 Agent 项目，可独立安装和运行。Qdrant 保�
 
 ## 使用流程
 
-1. 安装 Praxis-RAG，准备 Qdrant，并按需配置 PDF 解析环境。
+1. 安装 TraceRAG，准备 Qdrant，并按需配置 PDF 解析环境。
 2. 启动 `rag-service`，打开 `http://127.0.0.1:8011/console`。
 3. 在“连接配置”中填写并测试模型 API，选择工作区。
 4. 上传文档，在“检索调试”中检查返回内容与来源。
@@ -98,6 +117,10 @@ Praxis-RAG 不依赖其他 Agent 项目，可独立安装和运行。Qdrant 保�
 | [验证记录](VALIDATION.md) | 已执行的验证及其覆盖范围。 |
 | [PDF 验证记录](benchmarks/PDF_VALIDATION.md) | PDF 解析实测结果与未解决样例。 |
 | [Word 验证记录](benchmarks/WORD_VALIDATION.md) | DOC/DOCX、图片检索、表格和浏览器实测结果及限制。 |
+| [中英文检索评测](benchmarks/retrieval/README.md) | 数据准备、四种检索配置对照与复现命令。 |
+| [100+100 检索评测结果](benchmarks/retrieval/REPORT_100.md) | CMRC2018 与 HotpotQA 固定子集的文档级 Recall、MRR、NDCG 与耗时。 |
 | [历史开发记录](PROGRESS.md) | 项目早期开发阶段记录，不作为当前功能清单。 |
 
-产品名为 **Praxis-RAG**，Python 安装包名为 `praxis-rag`。启动命令仍为 `rag-service`，内部模块仍为 `rag_mcp`；本次更名不迁移现有知识库数据。
+产品名为 **溯知 RAG（TraceRAG）**，Python 安装包名为 `tracerag`。启动命令为 `rag-service`，内部模块为 `rag_mcp`。为兼容已有部署，配置与数据目录继续使用 `~/.praxis-rag/`，更名不会迁移知识库或更改集合名。
+
+项目基于 [Praxis-RAG](https://github.com/Guan0923/Praxis-RAG) 继续开发，保留原有提交历史。
